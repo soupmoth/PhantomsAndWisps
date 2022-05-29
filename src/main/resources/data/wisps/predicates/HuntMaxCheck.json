@@ -1,0 +1,11 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "killer_player",
+  "predicate": {
+    "effects": {
+      "wisps:hunt": {
+        "amplifier": 9
+      }
+    }
+  }
+}

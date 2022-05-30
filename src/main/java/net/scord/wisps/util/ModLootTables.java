@@ -21,8 +21,11 @@ import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.util.Identifier;
 import org.spongepowered.include.com.google.gson.JsonObject;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
+import java.text.ParseException;
 
 public class ModLootTables {
 
@@ -32,21 +35,7 @@ public class ModLootTables {
     public static void modifyLootTables() {
 
 
-        LootTableLoadingCallback.EVENT.register((resourceManager, manager, id, supplier, setter) -> {
-            if (PHANTOM_ID.equals(id)) {
 
-                Object obj = JsonParser.parseReader(new FileReader())
-
-                NbtCompound nbt = new NbtCompound();
-                nbt.putInt("Size", 16);
-
-                FabricLootPoolBuilder poolBuilder = FabricLootPoolBuilder.builder()
-                        .rolls(ConstantLootNumberProvider.create(1))
-                        .conditionally(RandomChanceWithLootingLootCondition.builder(1f, 0.15f))
-                        .conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().nbt(new NbtPredicate(nbt))))
-                        .with(ItemEntry.builder(Items.DIAMOND));
-                }
-            });
     }
 
 

@@ -1,13 +1,19 @@
 package net.scord.wisps.mixin;
 
+import com.eliotlash.mclib.math.functions.classic.Mod;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.server.dedicated.gui.PlayerStatsGui;
 import net.minecraft.stat.Stats;
@@ -17,6 +23,7 @@ import net.scord.wisps.WispsMod;
 import net.scord.wisps.effect.HuntEffect;
 import net.scord.wisps.effect.ModEffects;
 import net.scord.wisps.entity.ai.goal.PhantomHuntTarget;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,6 +39,7 @@ abstract class PhantomMixin extends MobEntity {
 
     @Shadow public abstract int getPhantomSize();
 
+    @Shadow @Final private static TrackedData<Integer> SIZE;
     protected final int BASE_PHANTOM_DAMAGE = 4;
     protected final int BASE_PHANTOM_HEALTH = 10;
     protected final int BASE_PHANTOM_EXP = 10;
@@ -87,6 +95,30 @@ abstract class PhantomMixin extends MobEntity {
             i += 3 * (1+player.getStatusEffect(ModEffects.HUNT).getAmplifier());
         }
         return i;
+    }
+
+    @Override
+    protected void dropLoot(DamageSource source, boolean causedByPlayer) {
+        super.dropLoot(source, causedByPlayer);
+        if (causedByPlayer) {
+
+            if (source.getAttacker() instanceof PlayerEntity) {
+                if (((PlayerEntity) source.getAttacker()).getStatusEffect(ModEffects.HUNT).getAmplifier() >= 9) {
+                    int chance = this.random.nextInt(100);
+                    int i = EnchantmentHelper.getLooting((LivingEntity)source.getAttacker());
+                    int j = 0;
+                    if (source.isMagic()) j = 2;
+
+                    if (chance + ((i+j) * 2) > 90) {
+                        dropItem(Items.DIAMOND);
+                    }
+                }
+
+
+            }
+
+
+        }
     }
 
 

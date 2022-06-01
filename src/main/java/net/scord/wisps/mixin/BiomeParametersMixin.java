@@ -23,14 +23,14 @@ public class BiomeParametersMixin {
         this.writeCaveBiomeParameters(parameters,
                 this.defaultParameter, //temperature
                 this.defaultParameter, //humidity
-                MultiNoiseUtil.ParameterRange.of(-1.2F, 0.55F), //continentialness
+                this.defaultParameter, //continentialness
                 this.defaultParameter, //erosion
                 this.defaultParameter, //weirdness
                 0.0F,
                 WispsBiomes.ASTRAL_RIVER);
     }
     private void writeCaveBiomeParameters(Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> parameters, MultiNoiseUtil.ParameterRange temperature, MultiNoiseUtil.ParameterRange humidity, MultiNoiseUtil.ParameterRange continentalness, MultiNoiseUtil.ParameterRange erosion, MultiNoiseUtil.ParameterRange weirdness, float offset, RegistryKey<Biome> biome) {
-        parameters.accept(Pair.of(MultiNoiseUtil.createNoiseHypercube(temperature, humidity, continentalness, erosion, MultiNoiseUtil.ParameterRange.of(1f), weirdness, offset), biome));
+        parameters.accept(Pair.of(MultiNoiseUtil.createNoiseHypercube(temperature, humidity, continentalness, erosion, MultiNoiseUtil.ParameterRange.of(0.2f, 1.0f), weirdness, offset), biome));
     }
 
 }

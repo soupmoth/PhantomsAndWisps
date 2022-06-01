@@ -97,7 +97,7 @@ public class WispsMod implements ModInitializer, TerraBlenderApi {
 	@Override
 	public void onTerraBlenderInitialized() {
 
-		Regions.register(new WispsRegion(new Identifier(MOD_ID, "astral_river"), 10));
+		Regions.register(new WispsRegion(new Identifier(MOD_ID, "astral_river"), 2));
 
 	}
 }

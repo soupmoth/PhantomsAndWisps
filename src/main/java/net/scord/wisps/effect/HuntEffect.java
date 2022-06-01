@@ -17,6 +17,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
+import net.scord.wisps.WispsMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -33,10 +34,8 @@ public class HuntEffect extends StatusEffect {
     }
 
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-
-
-
         if (entity.world.getTimeOfDay() % TIME_IN_DAY < END_OF_DAY || entity.world.getTimeOfDay() % TIME_IN_DAY > END_OF_NIGHT) {
+            WispsMod.LOGGER.info(entity.getEntityName() + " lost Hunt effect from Day Time");
             entity.removeStatusEffect(ModEffects.HUNT);
             return;
         }
@@ -65,6 +64,7 @@ public class HuntEffect extends StatusEffect {
 
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onApplied(entity, attributes, amplifier);
+        WispsMod.LOGGER.info(entity.getEntityName() + " received Hunt.");
 
     }
 

@@ -13,10 +13,19 @@ import net.scord.wisps.effect.ModEffects;
 import net.scord.wisps.item.ModItems;
 import net.scord.wisps.util.ModLootTables;
 import net.scord.wisps.util.ModRegistries;
+import net.scord.wisps.world.WispsWorldGeneration;
+import net.scord.wisps.world.biomes.ModBiomes;
+import net.scord.wisps.world.biomes.WispsRegion;
+import net.scord.wisps.world.feature.ModPlacedFeatures;
+import net.scord.wisps.world.feature.WispsConfiguredFeatures;
+import net.scord.wisps.world.feature.WispsOreGeneration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
+import terrablender.api.TerraBlenderApi;
 
-public class WispsMod implements ModInitializer {
+public class WispsMod implements ModInitializer, TerraBlenderApi {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -33,10 +42,11 @@ public class WispsMod implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		WispsConfiguredFeatures.registerConfiguredFeatures();
 
 
 
-		WispsMod.LOGGER.info("WispsMod Initialiseing");
+		WispsMod.LOGGER.info("WispsMod Initialising");
 		//General behaviour
 
 		//Hunt amplifier increase code. The chance of Hunt increasing decreases with every level of Hunt.
@@ -47,7 +57,7 @@ public class WispsMod implements ModInitializer {
 				//if we already have a status effect...
 				if (hunt != null) {
 
-					int huntLevel = huntLevel = hunt.getAmplifier();
+					int huntLevel = hunt.getAmplifier();
 
 					if ((world.random.nextInt(huntLevel+1)) == 0) {
 						huntLevel++;
@@ -68,10 +78,26 @@ public class WispsMod implements ModInitializer {
 		});
 
 
+		//Most important to register first
 		ModRegistries.registerModStuffs();
 		ModItems.registerModItems();
-		ModEffects.registerEffects();
 		ModBlocks.registerModBlocks();
+		ModEffects.registerEffects();
+
+
 		ModLootTables.modifyLootTables();
+		WispsMod.LOGGER.info("Registering Biome details");
+		ModBiomes.registerBiomes();
+		ModBiomes.registerBiomeModifications();
+
+
+	}
+
+
+	@Override
+	public void onTerraBlenderInitialized() {
+
+		Regions.register(new WispsRegion(new Identifier(MOD_ID, "astral_river"), 10));
+
 	}
 }

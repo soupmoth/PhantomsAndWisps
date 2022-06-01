@@ -30,10 +30,11 @@ public class ModEffects {
     }
 
     public static void registerEffects() {
-
+        WispsMod.LOGGER.info("Trying Effects...");
         HUNT = registerNightStatusEffect("hunt");
         MOON_DAMAGE = registerMoonDamageStatusEffect("moon_damage");
         MOONLIGHT = registerStatusEffect("moonlight");
+        WispsMod.LOGGER.info("Registered Effects");
     }
 
 }

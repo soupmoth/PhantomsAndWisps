@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/wisps/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -23,6 +23,9 @@
     ],
     "client": [
       "net.scord.wisps.WispsClientMod"
+    ],
+    "terrablender": [
+      "net.scord.wisps.WispsMod"
     ]
   },
   "mixins": [

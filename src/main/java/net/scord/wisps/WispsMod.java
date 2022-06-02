@@ -13,12 +13,10 @@ import net.scord.wisps.effect.ModEffects;
 import net.scord.wisps.item.ModItems;
 import net.scord.wisps.util.ModLootTables;
 import net.scord.wisps.util.ModRegistries;
-import net.scord.wisps.world.WispsWorldGeneration;
 import net.scord.wisps.world.biomes.ModBiomes;
 import net.scord.wisps.world.biomes.WispsRegion;
 import net.scord.wisps.world.feature.ModPlacedFeatures;
 import net.scord.wisps.world.feature.WispsConfiguredFeatures;
-import net.scord.wisps.world.feature.WispsOreGeneration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import terrablender.api.Regions;
@@ -88,7 +86,6 @@ public class WispsMod implements ModInitializer, TerraBlenderApi {
 		ModLootTables.modifyLootTables();
 		WispsMod.LOGGER.info("Registering Biome details");
 		ModBiomes.registerBiomes();
-		ModBiomes.registerBiomeModifications();
 
 
 	}
@@ -96,7 +93,6 @@ public class WispsMod implements ModInitializer, TerraBlenderApi {
 
 	@Override
 	public void onTerraBlenderInitialized() {
-
 		Regions.register(new WispsRegion(new Identifier(MOD_ID, "astral_river"), 2));
 
 	}

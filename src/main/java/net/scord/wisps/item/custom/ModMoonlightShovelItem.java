@@ -17,9 +17,7 @@ import net.minecraft.world.World;
 import net.scord.wisps.effect.ModEffects;
 
 public class ModMoonlightShovelItem extends ShovelItem {
-
     private TagKey<Block> effectiveBlocks = BlockTags.SHOVEL_MINEABLE;
-
     private boolean moonlight = false;
 
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -33,7 +31,6 @@ public class ModMoonlightShovelItem extends ShovelItem {
         super(material, attackDamage, attackSpeed, settings);
     }
 
-
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         MoonlightToolUtil.applyMoonlightDamage(target, attacker, 0);
@@ -46,5 +43,4 @@ public class ModMoonlightShovelItem extends ShovelItem {
         return super.getMiningSpeedMultiplier(stack, state) + MoonlightToolUtil.getMoonlightMiningSpeed(moonlight, state, this.effectiveBlocks);
 
     }
-
 }

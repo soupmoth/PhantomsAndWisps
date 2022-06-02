@@ -18,6 +18,9 @@ public class BiomeParametersMixin {
 
     private final MultiNoiseUtil.ParameterRange defaultParameter = MultiNoiseUtil.ParameterRange.of(-1.0F, 1.0F);
 
+    /*
+    add our CAVE
+     */
     @Inject(method="writeCaveBiomes", at = @At("TAIL"))
     private void writeCaveBiomes(Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> parameters, CallbackInfo ci) {
         this.writeCaveBiomeParameters(parameters,

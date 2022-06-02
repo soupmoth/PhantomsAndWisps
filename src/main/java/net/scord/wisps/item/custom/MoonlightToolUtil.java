@@ -39,12 +39,11 @@ public class MoonlightToolUtil {
 
 
 
-    /**This method determines if a bonus should be applied to the mining speed.
-     * For reference, GOLD is 12f, Diamond is 8f, and Netherite is 9f
-     * As Moonlight tools will be 7f, the ideal is to lay between Netherite and Gold in terms
-     * of effectiveness due to the limitations of the tool.
-     *
-     *
+    /*
+    This method determines if a bonus should be applied to the mining speed.
+    For reference, GOLD is 12f, Diamond is 8f, and Netherite is 9f
+    As Moonlight tools will be 7f, the ideal is to lay between Netherite and Gold in terms
+    of effectiveness due to the limitations of the tool.
      */
     public static float getMoonlightMiningSpeed(Boolean moonlight, BlockState state, TagKey<Block> effectiveBlocks) {
         if (state.isIn(effectiveBlocks)) {

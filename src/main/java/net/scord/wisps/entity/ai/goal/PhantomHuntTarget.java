@@ -12,6 +12,10 @@ import net.scord.wisps.effect.ModEffects;
 import java.util.Comparator;
 import java.util.List;
 
+/*
+This class is literally just a copy of the PhantomTarget inner class that we mixin for custom behaviour.
+The intention is to have our Phantoms only attack targets that have the Hunt status effect.
+ */
 public class PhantomHuntTarget<T extends LivingEntity>
         extends Goal {
 

@@ -28,11 +28,9 @@ public class ModMoonlightAxeItem extends AxeItem  {
 
     }
 
-
     public ModMoonlightAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
-
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -41,12 +39,9 @@ public class ModMoonlightAxeItem extends AxeItem  {
         return super.postHit(stack, target, attacker);
     }
 
-
     @Override
     public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
         return super.getMiningSpeedMultiplier(stack, state) + MoonlightToolUtil.getMoonlightMiningSpeed(moonlight, state, this.effectiveBlocks);
 
     }
-
-
 }

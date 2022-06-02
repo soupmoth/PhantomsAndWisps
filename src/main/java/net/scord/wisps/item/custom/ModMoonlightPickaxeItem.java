@@ -18,9 +18,7 @@ import net.scord.wisps.WispsMod;
 import net.scord.wisps.effect.ModEffects;
 
 public class ModMoonlightPickaxeItem extends PickaxeItem {
-
     private TagKey<Block> effectiveBlocks = BlockTags.PICKAXE_MINEABLE;
-
     private boolean moonlight = false;
 
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -34,8 +32,6 @@ public class ModMoonlightPickaxeItem extends PickaxeItem {
         super(material, attackDamage, attackSpeed, settings);
     }
 
-
-
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         MoonlightToolUtil.applyMoonlightDamage(target, attacker, 0);
@@ -48,5 +44,4 @@ public class ModMoonlightPickaxeItem extends PickaxeItem {
         return (super.getMiningSpeedMultiplier(stack, state) + MoonlightToolUtil.getMoonlightMiningSpeed(moonlight, state, this.effectiveBlocks));
 
     }
-
 }

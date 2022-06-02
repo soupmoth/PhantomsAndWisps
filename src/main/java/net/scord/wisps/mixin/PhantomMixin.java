@@ -31,20 +31,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(PhantomEntity.class)
 abstract class PhantomMixin extends MobEntity {
-
     @Shadow public abstract int getPhantomSize();
-
     @Shadow @Final private static TrackedData<Integer> SIZE;
     protected final int BASE_PHANTOM_DAMAGE = 4;
     protected final int BASE_PHANTOM_HEALTH = 10;
     protected final int BASE_PHANTOM_EXP = 10;
 
-
     protected PhantomMixin(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
     }
-
-
 
     @ModifyArg(method = "initGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ai/goal/GoalSelector;add(ILnet/minecraft/entity/ai/goal/Goal;)V", ordinal = 3), index = 1)
     protected Goal addCustomGoal(Goal goal) {

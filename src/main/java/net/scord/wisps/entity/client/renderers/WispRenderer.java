@@ -20,10 +20,10 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.util.Color;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
+/*
+Wisp renderer. Has some custom behaviour.
+ */
 public class WispRenderer extends GeoEntityRenderer<WispEntity> {
-
-
-
     public WispRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new WispModel());
 
@@ -36,19 +36,22 @@ public class WispRenderer extends GeoEntityRenderer<WispEntity> {
 
     @Override
     public RenderLayer getRenderType(WispEntity animatable, float partialTicks, MatrixStack stack,
-                                     VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn,
-                                     Identifier textureLocation) {
+                                     VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
+                                     int packedLightIn, Identifier textureLocation) {
         return RenderLayer.getEntityTranslucent(getTextureLocation(animatable));
     }
 
-
-
+    /*
+    Red Shift when getting Angry
+    Fade when Despawning.
+     */
     @Override
     public Color getRenderColor(WispEntity animatable, float partialTicks, MatrixStack stack,
-                                VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn) {
+                                VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
+                                int packedLightIn) {
 
+        //shift to red as we get angy
         float redShift = ((float) animatable.getRedShift())/100f;
-
 
         float red = 1F;
         float green =  MathHelper.lerp(1-redShift, 0.25f, 1f);
@@ -60,7 +63,7 @@ public class WispRenderer extends GeoEntityRenderer<WispEntity> {
 
     @Override
     protected int getBlockLight(WispEntity wispEntity, BlockPos blockPos) {
-        return 12;
+        return 10;
     }
 
 }

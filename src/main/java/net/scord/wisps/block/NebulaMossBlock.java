@@ -17,6 +17,9 @@ public class NebulaMossBlock extends MossBlock {
         super(settings);
     }
 
+    /*
+    Override of Moss Block to instead use the custom moss behaviour defined in WispConfiguredFeatures
+     */
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         ((ConfiguredFeature) WispsConfiguredFeatures.NEBULA_MOSS_PATCH_BONEMEAL.value()).generate(world, world.getChunkManager().getChunkGenerator(), random, pos.up());
     }

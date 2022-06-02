@@ -19,12 +19,17 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(LivingEntityRenderer.class)
 public class PhantomRendererMixin  {
 
-
     @ModifyArg(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;IIFFFF)V"), index = 7)
     public float translucency(float par5) {
-        MinecraftClient minecraftClient = MinecraftClient.getInstance();
 
+        /*
+        This was a difficult mixin to implement. I wanted translucency to depend entirely on what mob was considered "translucent"
+        Instead, Insomnia and Hunt alters the transparency of any mob that is partially invisible from the InvisibleTo method being false
+        but Invisible being true.
+         */
+
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
 
         ClientPlayerEntity player = minecraftClient.player;
 
@@ -40,8 +45,6 @@ public class PhantomRendererMixin  {
 
             return Math.min(n, 1f);
         }
-
-
 
         return par5;
     }

@@ -16,13 +16,18 @@ import net.scord.wisps.world.feature.ModPlacedFeatures;
 import net.scord.wisps.world.feature.WispsConfiguredFeatures;
 
 public class WispsOverworldBiomes {
-
+    /*
+    was in the BuiltInBiomes class. Might be used eventually.
+     */
     protected static int calculateSkyColor(float color) {
         float $$1 = color / 3.0F;
         $$1 = MathHelper.clamp($$1, -1.0F, 1.0F);
         return MathHelper.hsvToRgb(0.62222224F - $$1 * 0.05F, 0.5F + $$1 * 0.1F, 1.0F);
     }
 
+    /*
+    Adds basic features that every biome from this mod should have.
+     */
     private static void addBasicFeatures(GenerationSettings.Builder builder) {
         DefaultBiomeFeatures.addLandCarvers(builder);
         DefaultBiomeFeatures.addAmethystGeodes(builder);
@@ -32,28 +37,31 @@ public class WispsOverworldBiomes {
         DefaultBiomeFeatures.addFrozenTopLayer(builder);
     }
 
-
+    /*
+    The astral river generation behaviour and parameters.
+     */
     public static Biome astralRiver() {
+        //adding mobs
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
 
         DefaultBiomeFeatures.addCaveMobs(spawnBuilder);
 
+        //generation
         GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder();
         addBasicFeatures(generationBuilder);
+
+        //Add general overworld features so that in a Single Biome world, this looks proper.
         DefaultBiomeFeatures.addFrozenLavaSpring(generationBuilder);
         DefaultBiomeFeatures.addDefaultOres(generationBuilder);
         DefaultBiomeFeatures.addDefaultDisks(generationBuilder);
-        DefaultBiomeFeatures.addEmeraldOre(generationBuilder);
-        DefaultBiomeFeatures.addInfestedStone(generationBuilder);
         DefaultBiomeFeatures.addPlainsFeatures(generationBuilder);
         DefaultBiomeFeatures.addDefaultMushrooms(generationBuilder);
         DefaultBiomeFeatures.addDefaultVegetation(generationBuilder);
 
+        //add Astral River unique features.
         generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ModPlacedFeatures.STARBLE_PLACED);
         generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ModPlacedFeatures.MOONSLATE_PLACED);
         generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.ASTRAL_RIVER_CEILING_FOILAGE);
-
-
 
         return (new Biome.Builder())
                 .precipitation(Biome.Precipitation.SNOW)

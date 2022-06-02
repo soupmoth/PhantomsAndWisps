@@ -17,11 +17,12 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.spawner.PhantomSpawner;
-import net.scord.wisps.WispsMod;
 import net.scord.wisps.effect.ModEffects;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
@@ -33,43 +34,41 @@ import java.util.Random;
 
 @Mixin(PhantomSpawner.class)
 public abstract class PhantomSpawnMixin {
-
     @Accessor abstract int getCooldown();
     @Accessor abstract void setCooldown(int cd);
-
     final int TICKS_IN_SECOND = 20;
     final int BASE_COOLDOWN = 10 * TICKS_IN_SECOND;
     final int VARIATION_COOLDOWN = 5 * TICKS_IN_SECOND;
 
-
-    /**This method is intended to rewrite the Phantom spawning behaviour.
+    /**
+     * This method is intended to rewrite the Phantom spawning behaviour.
+     *
+     * @param world         the world (wow)
+     * @param spawnMonsters are we spawning a monster? (yes)
+     * @param spawnAnimals  are we spawning an animal (no)
      * @reason The change is extremely drastic, so Injection was unlikely to be satisfactory for my needs here.
      * @author me nerds
-     * @param world the world (wow)
-     * @param spawnMonsters are we spawning a monster? (yes)
-     * @param spawnAnimals are we spawning an animal (no)
-     * @return the number of mobs we spawned.
      */
-    @Overwrite
-    public int spawn(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals) {
+    @Inject(method = "spawn", at = @At(value = "HEAD"), cancellable = true)
+    public void spawn(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals, CallbackInfoReturnable<Integer> cir) {
 
         if (!spawnMonsters) {
-            return 0;
+            cir.setReturnValue(0);
         }
         if (!world.getGameRules().getBoolean(GameRules.DO_INSOMNIA)) {
-            return 0;
+            cir.setReturnValue(0);
         }
         Random random = world.random;
 
         int cooldown = getCooldown()-1;
         setCooldown(cooldown);
         if (cooldown > 0) {
-            return 0;
+            cir.setReturnValue(0);
         }
         cooldown += (BASE_COOLDOWN + random.nextInt(VARIATION_COOLDOWN));
         setCooldown(cooldown);
         if (world.getAmbientDarkness() < 5 && world.getDimension().hasSkyLight()) {
-            return 0;
+            cir.setReturnValue(0);
         }
         int i = 0;
         for (PlayerEntity playerEntity : world.getPlayers()) {
@@ -94,8 +93,6 @@ public abstract class PhantomSpawnMixin {
                 huntLevel = playerEntity.getStatusEffect(ModEffects.HUNT).getAmplifier();
             }
 
-
-
             if (!SpawnHelper.isClearForSpawn(world, blockPos2 = blockPos.up(20 + random.nextInt(15)).east(-10 + random.nextInt(21)).south(-10 + random.nextInt(21)), blockState = world.getBlockState(blockPos2), fluidState = world.getFluidState(blockPos2), EntityType.PHANTOM)) continue;
             EntityData entityData = null;
             //initialise some data before we spawn Phantoms.
@@ -108,9 +105,8 @@ public abstract class PhantomSpawnMixin {
                 phantomEntity.refreshPositionAndAngles(blockPos2, 0.0f, 0.0f);
                 entityData = phantomEntity.initialize(world, localDifficulty, SpawnReason.NATURAL, entityData, null);
                 //randomly scale the size of the Phantom. This is determined between three sizes at maximum, starting at one size.
-
-                int origin = Math.min(16, (int) Math.pow(2, (double) Math.max(0, huntLevel-2)));
-                int bound = Math.min(16, (int) Math.pow(2, (double) Math.max(huntLevel, 0)));
+                int origin = Math.min(16, (int) Math.pow(2, Math.max(0, huntLevel-2)));
+                int bound = Math.min(16, (int) Math.pow(2, Math.max(huntLevel, 0)));
 
                 if (origin == bound) {
                     phantomEntity.setPhantomSize(bound);
@@ -124,7 +120,7 @@ public abstract class PhantomSpawnMixin {
             }
             i += l;
         }
-        return i;
+        cir.setReturnValue(i);;
     }
 
 }

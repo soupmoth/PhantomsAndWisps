@@ -23,15 +23,13 @@ public class WispsRegion extends Region {
         super(name, RegionType.OVERWORLD, weight);
     }
 
+    /*
+    Makes the added biomes to be compatible with other mods that use Terrablender and datapack-ish mods like Terralith.
+     */
     @Override
-    public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper)
-    {
-
+    public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
         this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
             builder.replaceBiome(WispsBiomes.ASTRAL_RIVER, WispsBiomes.ASTRAL_RIVER);
         });
-
-
-
     }
 }

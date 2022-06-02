@@ -13,6 +13,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
+//is this used? no clue.
 public abstract class WispModEntityRenderer<T extends LivingEntity & IAnimatable> extends GeoEntityRenderer<T> {
     private Matrix4f renderEarlyMat = new Matrix4f();
 

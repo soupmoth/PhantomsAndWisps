@@ -24,21 +24,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 abstract class HuntRenderChangesMixin {
-
     @Shadow
     @Final
     private MinecraftClient client;
-
     @Shadow
     private ClientWorld world;
-
     @Shadow
     private VertexBuffer lightSkyBuffer;
     @Shadow
     private VertexBuffer darkSkyBuffer;
     @Shadow
     private VertexBuffer starsBuffer;
-
     @Final
     private static final Identifier MOON_PHASES = new Identifier("textures/environment/moon_phases.png");
 

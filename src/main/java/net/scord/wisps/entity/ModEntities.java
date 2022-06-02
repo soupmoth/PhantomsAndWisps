@@ -13,5 +13,5 @@ public class ModEntities {
     public static final EntityType<WispEntity> WISP = Registry.register(
             Registry.ENTITY_TYPE, new Identifier(WispsMod.MOD_ID, "wisp"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WispEntity::new)
-                    .dimensions(EntityDimensions.changing(0.7f, 0.7f)).build());
+                    .dimensions(EntityDimensions.fixed(0.7f, 0.7f)).build());
 }

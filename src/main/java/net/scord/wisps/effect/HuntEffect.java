@@ -33,18 +33,25 @@ public class HuntEffect extends StatusEffect {
         super(statusEffectCategory, colour);
     }
 
+    /*
+    As Hunt as no real effects per tick, this simply is used to determine duration behaviour.
+    Hunt effects are intended to only be granted at night, so this method ensures this.
+     */
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+        //Effect is immediately cleared if it is considered day.
         if (entity.world.getTimeOfDay() % TIME_IN_DAY < END_OF_DAY || entity.world.getTimeOfDay() % TIME_IN_DAY > END_OF_NIGHT) {
             WispsMod.LOGGER.info(entity.getEntityName() + " lost Hunt effect from Day Time");
             entity.removeStatusEffect(ModEffects.HUNT);
             return;
         }
 
+        //store the current status effect temporarily and its parameters.
         StatusEffectInstance hunt = entity.getStatusEffect(ModEffects.HUNT);
         int huntDuration = hunt.getDuration();
         int huntAmplifier = hunt.getAmplifier();
         long targetTime = (entity.world.getTimeOfDay() % TIME_IN_DAY) + huntDuration;
 
+        //If our duration is extending beyond the end of night time, then reduce the duration.
         if (targetTime >= END_OF_NIGHT) {
             while (targetTime >= END_OF_NIGHT) {
                 huntDuration--;
@@ -57,11 +64,13 @@ public class HuntEffect extends StatusEffect {
 
     }
 
+    //here in case we want to do anything with this.
     @Override
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onRemoved(entity, attributes, amplifier);
     }
 
+    //here in case we want to do anything with this.
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onApplied(entity, attributes, amplifier);
         WispsMod.LOGGER.info(entity.getEntityName() + " received Hunt.");

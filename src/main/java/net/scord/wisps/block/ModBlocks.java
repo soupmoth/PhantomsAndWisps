@@ -15,6 +15,10 @@ public class ModBlocks {
 
     public final static int ASTRAL_RIVER_BRIGHTNESS = 2;
 
+
+    /*
+    Glowing concrete.
+     */
     public static final Block GLOWING_WHITE_CONCRETE = registerBlock("glowing_white_concrete", new Block(AbstractBlock.Settings.of(Material.STONE, DyeColor.WHITE).requiresTool().strength(1.8f).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_ORANGE_CONCRETE = registerBlock("glowing_orange_concrete", new Block(AbstractBlock.Settings.of(Material.STONE, DyeColor.ORANGE).requiresTool().strength(1.8f).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_MAGENTA_CONCRETE = registerBlock("glowing_magenta_concrete", new Block(AbstractBlock.Settings.of(Material.STONE, DyeColor.MAGENTA).requiresTool().strength(1.8f).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
@@ -31,6 +35,9 @@ public class ModBlocks {
     public static final Block GLOWING_GREEN_CONCRETE = registerBlock("glowing_green_concrete", new Block(AbstractBlock.Settings.of(Material.STONE, DyeColor.GREEN).requiresTool().strength(1.8f).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_RED_CONCRETE = registerBlock("glowing_red_concrete", new Block(AbstractBlock.Settings.of(Material.STONE, DyeColor.RED).requiresTool().strength(1.8f).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_BLACK_CONCRETE = registerBlock("glowing_black_concrete", new Block(AbstractBlock.Settings.of(Material.STONE, DyeColor.BLACK).requiresTool().strength(1.8f).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
+    /*
+    Glowing concrete powder.
+     */
     public static final Block GLOWING_WHITE_CONCRETE_POWDER = registerBlock("glowing_white_concrete_powder", new ConcretePowderBlock(GLOWING_WHITE_CONCRETE, AbstractBlock.Settings.of(Material.AGGREGATE, DyeColor.WHITE).strength(0.5f).sounds(BlockSoundGroup.SAND).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_ORANGE_CONCRETE_POWDER = registerBlock("glowing_orange_concrete_powder", new ConcretePowderBlock(GLOWING_ORANGE_CONCRETE, AbstractBlock.Settings.of(Material.AGGREGATE, DyeColor.ORANGE).strength(0.5f).sounds(BlockSoundGroup.SAND).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_MAGENTA_CONCRETE_POWDER = registerBlock("glowing_magenta_concrete_powder", new ConcretePowderBlock(GLOWING_MAGENTA_CONCRETE, AbstractBlock.Settings.of(Material.AGGREGATE, DyeColor.MAGENTA).strength(0.5f).sounds(BlockSoundGroup.SAND).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
@@ -48,6 +55,10 @@ public class ModBlocks {
     public static final Block GLOWING_RED_CONCRETE_POWDER = registerBlock("glowing_red_concrete_powder", new ConcretePowderBlock(GLOWING_RED_CONCRETE, AbstractBlock.Settings.of(Material.AGGREGATE, DyeColor.RED).strength(0.5f).sounds(BlockSoundGroup.SAND).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
     public static final Block GLOWING_BLACK_CONCRETE_POWDER = registerBlock("glowing_black_concrete_powder", new ConcretePowderBlock(GLOWING_BLACK_CONCRETE, AbstractBlock.Settings.of(Material.AGGREGATE, DyeColor.BLACK).strength(0.5f).sounds(BlockSoundGroup.SAND).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
 
+
+    /*
+    Starble. A lightly glowing block that spawns in the Astral River.
+     */
     public static final Block STARBLE = registerBlock("starble", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.CALCITE).luminance(state -> ASTRAL_RIVER_BRIGHTNESS)), ItemGroup.BUILDING_BLOCKS);
     public static final Block SMOOTH_STARBLE = registerBlock("smooth_starble", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.CALCITE).luminance(state -> ASTRAL_RIVER_BRIGHTNESS)), ItemGroup.BUILDING_BLOCKS);
     public static final Block STARBLE_BRICKS = registerBlock("starble_bricks", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.CALCITE).luminance(state -> ASTRAL_RIVER_BRIGHTNESS)), ItemGroup.BUILDING_BLOCKS);
@@ -55,7 +66,15 @@ public class ModBlocks {
     public static final Block MOSSY_STARBLE_BRICKS = registerBlock("mossy_starble_bricks", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.CALCITE).luminance(state -> ASTRAL_RIVER_BRIGHTNESS)), ItemGroup.BUILDING_BLOCKS);
     public static final Block CHISELED_STARBLE = registerBlock("chiseled_starble", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(1.5f, 6f).sounds(BlockSoundGroup.CALCITE).luminance(state -> 6)), ItemGroup.BUILDING_BLOCKS);
 
+    /*
+    Moonslate. Similar to Starble, but replaces Deepslate.
+     */
+
     public static final Block MOONSLATE = registerBlock("moonslate", new Block(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.5f, 4f).sounds(BlockSoundGroup.BONE).luminance(state -> ASTRAL_RIVER_BRIGHTNESS)), ItemGroup.BUILDING_BLOCKS);
+
+    /*
+    Astral river foilage blocks.
+     */
 
     public static final Block NOVA_LICHEN = registerBlock("nova_lichen", new HangingRootsBlock(AbstractBlock.Settings.of(Material.PLANT).requiresTool().strength(0.2f).sounds(BlockSoundGroup.WEEPING_VINES).luminance(state -> 6).dynamicBounds().nonOpaque()), ItemGroup.DECORATIONS);
     public static final Block NEBULA_MOSS = registerBlock("nebula_moss", new NebulaMossBlock(AbstractBlock.Settings.of(Material.PLANT).requiresTool().strength(1.5f).sounds(BlockSoundGroup.SLIME).luminance(state -> 3)), ItemGroup.DECORATIONS);

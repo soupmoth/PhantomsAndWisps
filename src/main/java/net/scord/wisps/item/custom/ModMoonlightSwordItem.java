@@ -30,7 +30,7 @@ public class ModMoonlightSwordItem extends SwordItem {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        MoonlightToolUtil.applyMoonlightDamage(target, attacker, 5);
+        MoonlightToolUtil.applyMoonlightDamage(target, attacker, 25);
 
         return super.postHit(stack, target, attacker);
     }

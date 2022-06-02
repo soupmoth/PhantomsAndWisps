@@ -18,11 +18,6 @@ public class ModBiomes implements TerraBlenderApi {
         register(WispsBiomes.ASTRAL_RIVER, WispsOverworldBiomes.astralRiver());
     }
 
-    public static void registerBiomeModifications() {
-        //BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.BEACH), GenerationStep.Feature.UNDERGROUND_DECORATION,
-                //ModPlacedFeatures.STARBLE_PLACED.getKey().get());
-    }
-
     private static void register(RegistryKey<Biome> key, Biome biome)
     {
         BuiltinRegistries.add(BuiltinRegistries.BIOME, key, biome);

@@ -14,9 +14,7 @@ import net.minecraft.world.World;
 import net.scord.wisps.effect.ModEffects;
 
 public class ModMoonlightHoeItem extends HoeItem {
-
     private TagKey<Block> effectiveBlocks = BlockTags.HOE_MINEABLE;
-
     private boolean moonlight = false;
 
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -30,7 +28,6 @@ public class ModMoonlightHoeItem extends HoeItem {
         super(material, attackDamage, attackSpeed, settings);
     }
 
-
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         MoonlightToolUtil.applyMoonlightDamage(target, attacker, 0);
@@ -43,5 +40,4 @@ public class ModMoonlightHoeItem extends HoeItem {
         return super.getMiningSpeedMultiplier(stack, state) + MoonlightToolUtil.getMoonlightMiningSpeed(moonlight, state, this.effectiveBlocks);
 
     }
-
 }
